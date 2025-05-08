@@ -387,6 +387,10 @@ html {
     .nav-links.active {
       display: flex;
     }
+      
+    #sobre {
+      text-align: center;
+    }
 
     footer {
       font-size: 13px; /* Ajuste do tamanho da fonte */
