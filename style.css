@@ -340,6 +340,10 @@ html {
       display: flex;
     }
 
+    #sobre {
+      text-align: center;
+    }
+    
     .galeria {
       flex-direction: column;
       align-items: center;
