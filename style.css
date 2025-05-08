@@ -340,10 +340,6 @@ html {
       display: flex;
     }
 
-    #sobre {
-      text-align: center;
-    }
-
     .galeria {
       flex-direction: column;
       align-items: center;
@@ -382,10 +378,6 @@ html {
   
     .nav-links.active {
       display: flex;
-    }
-      
-    #sobre {
-      text-align: center;
     }
 
     footer {
