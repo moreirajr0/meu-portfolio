@@ -1,1 +1,387 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #f9f9f9;
+    color: #333;
+  }
+  
+  .header-destaque {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* degrade sutil */
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px 60px;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 4px solid #00c2cb; /* detalhe em cor viva */
+  }
+  
+  .header-destaque h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  .header-destaque p {
+    margin-top: 12px;
+    font-size: 20px;
+    color: #d0d0d0;
+    font-weight: 300;
+  }
+  
+  
+  /* Menu */
+  nav {
+    background: rgba(0, 79, 110, 0.95); /* leve transparência */
+    padding: 16px 32px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+  }
+  
+  nav a {
+    color: #fff;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  .menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    justify-content: space-between;
+  }
+  
+  .menu-icon div {
+    background-color: #fff;
+    height: 3px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Animação do menu hambúrguer para X */
+.menu-icon.active div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
 
+.menu-icon.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.active div:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.menu-icon div {
+  transition: all 0.3s ease;
+}
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 60px 20px 40px;
+  }
+  
+  h2 {
+    font-size: 28px;
+    margin: 0 0 30px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  footer {
+    background: #004f6e;
+    color: #fff;
+    text-align: center;
+    padding: 1px;
+  }
+  
+  a {
+    color: #1e90ff;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  .email-item {
+    position: relative;
+    width: 200px;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .email-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+  
+  .email-tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 6px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .email-item:hover {
+    height: 500px;
+  }
+  
+  .email-item:hover img {
+    object-fit: contain;
+  }
+  
+  .galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .email-extra {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+
+  #landing img {
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #landing img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  
+  #Dashboard img {
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #Dashboard img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  #btn-veja-mais {
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #btn-veja-mais:hover {
+    background-color: #005bb5;
+  }
+
+  #galeria-lps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .landing-swiper {
+    width: 100%;
+    padding: 40px 0;
+  }
+
+  .swiper-slide {
+    text-align: center;
+  }
+
+  .Dashboard-swiper {
+    width: 100%;
+    padding: 40px 0;
+  }
+
+  .Dashboard-swiper-slide {
+    text-align: center;
+  }
+  
+  .swiper-slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  #contato {
+    padding: 40px 20px;
+  }
+  
+  .contato-links {
+    margin-top: 20px;
+  }
+  
+  .contato-links a {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 28px;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .contato-links a:hover {
+    color: #0077b5; /* azul do LinkedIn */
+  }
+  
+  .contato-links a[href*="wa.me"]:hover {
+    color: #25D366; /* verde do WhatsApp */
+  }
+  
+  footer {
+    background-color: #004f6e; /* Cor de fundo do footer */
+    color: #fff; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+    padding: 15px 20px; /* Espaçamento interno */
+    font-size: 14px; /* Tamanho da fonte */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+    }
+  
+    .nav-links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+  
+    .nav-links a {
+      padding: 12px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+  
+    .menu-icon {
+      display: flex;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+
+    .galeria {
+      flex-direction: column;
+      align-items: center;
+    }
+
+      footer {
+        font-size: 12px; /* Menor tamanho de fonte para dispositivos móveis */
+        padding: 10px 15px; /* Ajusta o padding */
+      }
+     
+  }
+  
+  @media (max-width: 1024px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+    }
+  
+    .nav-links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+  
+    .nav-links a {
+      padding: 12px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+  
+    .menu-icon {
+      display: flex;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+    footer {
+      font-size: 13px; /* Ajuste do tamanho da fonte */
+      padding: 12px 18px; /* Ajuste no padding */
+    }
+  
+  }
