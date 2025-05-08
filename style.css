@@ -344,7 +344,11 @@ html {
       flex-direction: column;
       align-items: center;
     }
-
+    .email-extra {
+      flex-direction: column;
+      align-items: center;
+    }
+      
       footer {
         font-size: 12px; /* Menor tamanho de fonte para dispositivos móveis */
         padding: 10px 15px; /* Ajusta o padding */
