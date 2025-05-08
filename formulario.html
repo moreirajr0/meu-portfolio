@@ -1,0 +1,302 @@
+<!--%%[
+
+SET @subscriberkey = AttributeValue('_subscriberkey')
+SET @email = AttributeValue('email')
+SET @nome = AttributeValue("nome")
+
+
+]%%-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Coca-cola</title>
+    <link rel="icon" type="image/png" href="https://image.crm.infracommerce.com.br/lib/fe3611737164047e771478/m/1/4bda9030-5f12-40ab-b330-d6eb095745ad.png">
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            max-height: 270px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 16px;
+            line-height: 2;
+            color: #555;
+        }
+
+        #um {
+            text-align: center;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            max-width: 50%;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .nota {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .nota input[type="radio"] {
+            display: none;
+        }
+
+        .nota label {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 0 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #ddd;
+        }
+
+        .nota label:hover {
+            background-color: #aaa;
+            color: white;
+        }
+
+        .nota input[type="radio"]:checked+label {
+            background-color: #333;
+            color: white;
+        }
+
+        .button {
+            background: linear-gradient(to right, #16E3F8, #01E79C, #B5CF42, #FFAF00, #FF9A00, #FF7501, #FE5D00, #FE1300);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin: 0 auto;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 30%;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: black;
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            margin-top: auto;
+            font-size: 10px;
+            justify-content: flex-end;
+            padding-right: 50%;
+        }
+
+        @media screen and (max-width: 768px) {
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+                max-height: 100px;
+            }
+
+            h2 {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 16px;
+                line-height: 1.6;
+                color: #333;
+            }
+
+            h3 {
+                text-align: center;
+                font-size: 12px;
+                margin-top: 16px;
+                line-height: 2;
+                color: #555;
+            }
+
+            header {
+                position: relative;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content {
+                font-size: 16px;
+                width: 100%;
+            }
+
+            .nota label {
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
+                font-size: 12px;
+                margin: 0 3px;
+            }
+
+            .button {
+                background: linear-gradient(to right, #16E3F8, #01E79C, #B5CF42, #FFAF00, #FF9A00, #FF7501, #FE5D00, #FE1300);
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: block;
+                margin: 0 auto;
+                font-size: 14px;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: background 0.3s ease;
+                width: 100%;
+                margin-top: 20px;
+                font-weight: bold;
+            }
+
+            .button:hover {
+                background: black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <img src="https://image.crm.infracommerce.com.br/lib/fe3611737164047e771478/m/1/f9070a8e-92a2-494d-89c1-d15284a839ad.jpg" alt="Logo">
+
+        <div>
+            <h2>%%nome%%, aqui na Coca-Cola Andina, monitoramos de perto nossa base de clientes,
+                e temos a honra de selecioná-lo como um embaixador de nossa marca.</h2>
+
+            <h3>Como primeira missão, gostaríamos de conhecer os diferenciais que você identifica em nossa loja e como
+                podemos continuar aprimorando sua experiência.
+                <p>Sua opinião é crucial para a melhoria contínua de nossos serviços e para assegurar que sempre estejamos
+                    alinhados às suas expectativas.</h3>
+            </p>
+        </div>
+    </header>
+
+    <div class="content">
+        <p id="um">Estamos ansiosos para ouvir suas ideias e sugestões.</p><br>
+        <form id="meuFormulario" action="url pag redirect" method="GET">
+            <p>Qual o diferencial que te faz comprar em nossa loja?</p>
+            <textarea name="descricao1" id="descricao1" cols="25" rows="5" required></textarea>
+            <br>
+
+            <p>De 0 a 10, o quanto você indicaria nossa loja a um amigo?</p>
+            <div class="nota">
+                <input type="radio" id="nota-0" name="nota" value="0" required>
+                <label for="nota-0" style="background-color: #B62226;">0</label>
+
+                <input type="radio" id="nota-1" name="nota" value="1" required>
+                <label for="nota-1" style="background-color: #D52128;">1</label>
+
+                <input type="radio" id="nota-2" name="nota" value="2" required>
+                <label for="nota-2" style="background-color: #E85326;">2</label>
+
+                <input type="radio" id="nota-3" name="nota" value="3" required>
+                <label for="nota-3" style="background-color: #EC6F25;">3</label>
+
+                <input type="radio" id="nota-4" name="nota" value="4" required>
+                <label for="nota-4" style="background-color: #F6A725;">4</label>
+
+                <input type="radio" id="nota-5" name="nota" value="5" required>
+                <label for="nota-5" style="background-color: #FDC829;">5</label>
+
+                <input type="radio" id="nota-6" name="nota" value="6" required>
+                <label for="nota-6" style="background-color: #EBDA0F;">6</label>
+
+                <input type="radio" id="nota-7" name="nota" value="7" required>
+                <label for="nota-7" style="background-color: #E5E146;">7</label>
+
+                <input type="radio" id="nota-8" name="nota" value="8" required>
+                <label for="nota-8" style="background-color: #C2D235;">8</label>
+
+                <input type="radio" id="nota-9" name="nota" value="9" required>
+                <label for="nota-9" style="background-color: #AECA3B;">9</label>
+
+                <input type="radio" id="nota-10" name="nota" value="10" required>
+                <label for="nota-10" style="background-color: #65B44E;">10</label>
+            </div>
+
+            <p>Sinta-se a vontade para sugerir melhorias</p>
+            <textarea name="descricao2" id="descricao2" cols="25" rows="5"></textarea>
+            <br>
+
+            <input type="hidden" id="subscriberKey" name="subscriberKey" value="%%=v(@subscriberkey)=%%">
+            <input type="hidden" id="email" name="email" value="%%=v(@email)=%%">
+            <input type="hidden" id="nome" name="nome" value="%%=v(@nome)=%%">
+
+            <!-- Botão com degradê -->
+            <button type="submit" class="button">Enviar Respostas</button>
+        </form>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Rodapé -->
+    <footer style="position: fixed; bottom: 0; left: 0; right: 0;">
+        © 2024 • Coca Cola Todos os direitos reservados.
+    </footer>
+</body>
+
+</html>

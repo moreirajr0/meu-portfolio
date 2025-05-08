@@ -1,0 +1,389 @@
+        <!--<input type="checkbox" id="Nao_quero_email" name="Nao_quero_email"> Não quero mais receber estes e-mails<br>
+        %%[
+VAR @sid, @jid, @reason, @lue, @lue_prop, @lue_statusCode, @overallStatus, @requestId, @Response, @Status, @Error, @nome, @email
+
+SET @subscriberkey = AttributeValue('_subscriberkey')
+SET @email = AttributeValue('email')
+SET @jobid = AttributeValue('jobid')
+SET @listid = AttributeValue('listid')
+SET @batchid = AttributeValue('_jobSubscriberbatchid')
+SET @nome = AttributeValue("nome")
+
+
+]%%
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unsubscribe Page</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://image.crm.infracommerce.com.br/lib/fe2d11737164047e7c1274/m/1/12a5dff6-b5e4-48ee-9e2e-c6eb586fda8e.png"
+    />-->
+    <!-- Substitua "caminho_para_seu_icone.png" pelo caminho do seu arquivo de ícone -->
+
+    <style>
+      body {
+        background-color: #f2f2f2;
+        /* Cor de fundo cinza */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        /* Adicionando uma fonte padrão */
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto; /* Centraliza a imagem */
+        max-height: 170px; /* Define uma altura máxima para a imagem */
+      }
+
+      .content {
+        background-color: white;
+        /* Cor de fundo do formulário */
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        /* Sombra branca */
+        max-width: 410px;
+        width: 100%;
+        margin-top: 10px;
+        /* Espaçamento superior */
+      }
+
+      .content0 {
+        background-color: white;
+        /* Cor de fundo do formulário */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        /* Sombra branca */
+        max-width: 410px;
+        width: 100%;
+        margin-top: 10px;
+        /* Espaçamento superior */
+        font-size: 12px;
+      }
+
+      .content h4 {
+        margin: 0; /* Remove todas as margens */
+      }
+
+      #descricao {
+        display: none;
+        /* Inicialmente, oculta a textarea */
+      }
+
+      /* Estilizando o botão */
+      .button {
+        background: #d64000;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 100%;
+        margin-top: 20px;
+        /* Espaçamento superior */
+        font-weight: bold;
+        /* Adicionando negrito */
+      }
+
+      .button:hover {
+        background: #123021;
+      }
+
+      /* Estilos para o rodapé e cabeçalho */
+      footer {
+        color: white;
+        text-align: center;
+        padding: 5px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      footer {
+        background-color: black;
+        margin-top: auto;
+        /* Empurra para o final da página */
+        font-size: 10px;
+        /* Definindo o tamanho da fonte para o rodapé */
+        display: flex; /* Usar flexbox */
+        justify-content: flex-end; /* Alinhar conteúdo à direita */
+        padding-right: 50%; /* Adiciona espaço à direita do texto */
+      }
+
+      h2,
+      p {
+        text-align: center;
+      }
+
+      @media screen and (max-width: 600px) {
+        img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 0 auto; /* Centraliza a imagem */
+          max-height: 100px; /* Define uma altura máxima para a imagem */
+          max-width: 410px; /* Define a largura máxima da imagem para 410px, igual à .content */
+        }
+
+        h2 {
+          text-align: center; /* Centraliza o título */
+          margin-top: 20px; /* Ajusta o espaço superior do título */
+        }
+        h4 {
+          text-align: center; /* Centraliza o título */
+        }
+
+        header {
+          position: relative; /* Habilita o posicionamento relativo */
+          height: auto; /* Altura automática */
+          display: flex; /* Usar flexbox */
+          flex-direction: column; /* Ajusta a direção dos itens para empilhar verticalmente */
+          align-items: center; /* Centraliza os itens horizontalmente */
+        }
+
+        .content {
+          font-size: 12px;
+          width: 100%; /* Faz com que o content ocupe 100% da largura */
+          max-width: 100%; /* Remove o limite de largura máxima */
+          padding: 20px; /* Ajusta o padding para um visual melhor em telas menores */
+          box-shadow: none; /* Remove a sombra para simplicidade em telas menores */
+        }
+
+        .button {
+          padding: 8px 16px; /* Ajusta o padding para um botão menor */
+          font-size: 12px; /* Diminui o tamanho da fonte */
+          border-radius: 16px; /* Ajusta o border-radius */
+        }
+
+        .button:hover {
+          background: black;
+        }
+      }
+
+      @media screen and (max-width: 375px) {
+        img {
+          max-width: 100%; /* Faz a imagem ocupar a largura total */
+          height: auto; /* Mantém a proporção da imagem */
+          max-height: 80px; /* Ajusta a altura máxima da imagem conforme necessário */
+        }
+
+        .content {
+          width: 100%; /* Garante que o conteúdo ocupe 100% da largura */
+          padding: 20px; /* Reduz o padding para um melhor ajuste em telas menores */
+          box-sizing: border-box; /* Inclui o padding na largura total */
+          max-width: 100%; /* Garante que o conteúdo não ultrapasse a largura da tela */
+        }
+        .button {
+          padding: 8px 16px; /* Ajusta o padding para um botão menor */
+          font-size: 12px; /* Diminui o tamanho da fonte */
+          border-radius: 16px; /* Ajusta o border-radius */
+        }
+        .button:hover {
+          background: black;
+        }
+      }
+
+      @media screen and (max-width: 425px) {
+        img {
+          max-width: 100%; /* Faz a imagem ocupar a largura total */
+          height: auto; /* Mantém a proporção da imagem */
+          max-height: 80px; /* Ajusta a altura máxima da imagem conforme necessário */
+        }
+
+        .content {
+          width: 100%; /* Garante que o conteúdo ocupe 100% da largura */
+          padding: 20px; /* Reduz o padding para um melhor ajuste em telas menores */
+          box-sizing: border-box; /* Inclui o padding na largura total */
+          max-width: 100%; /* Garante que o conteúdo não ultrapasse a largura da tela */
+        }
+        .button {
+          padding: 8px 16px; /* Ajusta o padding para um botão menor */
+          font-size: 12px; /* Diminui o tamanho da fonte */
+          border-radius: 16px; /* Ajusta o border-radius */
+        }
+        .button:hover {
+          background: black;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Cabeçalho -->
+    <header>
+      <img
+        src="https://image.crm.infracommerce.com.br/lib/fe2d11737164047e7c1274/m/1/380c032e-de9c-4a1c-b3a5-387ab0179103.png"
+        alt="Logo"
+      />
+
+      <div>
+        <h2>Ajude-nos a melhorar!</h2>
+        <p>Sua opinião é muito importante para nós.</p>
+        <p>Por favor, preencha o formulário abaixo:</p>
+      </div>
+    </header>
+
+    <div class="content">
+      <form
+        action="pag de redirect"
+        method="GET"
+        onsubmit="return validarFormulario()"
+      >
+        <!--<input type="checkbox" id="Nao_quero_email" name="Nao_quero_email"> Não quero mais receber estes e-mails<br>-->
+        <h4>
+          Qual foi o motivo principal para você cancelar sua assinatura de nossa
+          newsletter?
+        </h4>
+        <br />
+        <br />
+        <br />
+        <input type="checkbox" id="Nao_inscrevi" name="Nao_inscrevi" /> Eu não
+        me inscrevi para receber esses e-mails.<br />
+        <input type="checkbox" id="Muitos_emails" name="Muitos_emails" /> Estou
+        recebendo muitos e-mails.<br />
+        <input
+          type="checkbox"
+          id="Sem_interesse_produtos"
+          name="Sem_interesse_produtos"
+        />
+        Os produtos não são do meu interesse.<br />
+        <input type="checkbox" id="Nao_entrega" name="Nao_entrega" /> Não há
+        entrega disponível no meu endereço.<br />
+        <input type="checkbox" id="frete_alto" name="frete_alto" /> O custo do
+        frete é muito alto.<br />
+        <input type="checkbox" id="prazo_longo" name="prazo_longo" /> O prazo de
+        entrega é muito longo.<br />
+
+        <input type="checkbox" id="outros" name="outros" /> Outros motivos<br />
+        <textarea id="descricao" name="descricao" cols="40" rows="3"></textarea
+        ><br />
+
+        <input
+          type="hidden"
+          id="subscriberKey"
+          name="subscriberKey"
+          value="%%=v(@subscriberkey)=%%"
+        />
+        <input type="hidden" id="email" name="email" value="%%=v(@email)=%%" />
+        <input type="hidden" id="jobid" name="jobid" value="%%=v(@jobid)=%%" />
+        <input
+          type="hidden"
+          id="listid"
+          name="listid"
+          value="%%=v(@listid)=%%"
+        />
+        <input
+          type="hidden"
+          id="batchid"
+          name="batchid"
+          value="%%=v(@batchid)=%%"
+        />
+
+        <!-- Botão com degradê-->
+        <button type="submit" class="button">Enviar Respostas</button>
+      </form>
+    </div>
+
+    <div class="content0">
+      <!-- Descrição explicativa da LP -->
+      <div class="descricao-texto">
+         <p>Essa LP foi desenvolvida com o objetivo de permitir que os usuários optassem por não receber mais comunicações via e-mail. A página coleta informações como nome, e-mail, assunto da comunicação que o usuario clicou para se descadastrar, o motivo do descadastro e a data.
+             Esses dados eram armazenados em uma Data Extension no Salesforce Marketing Cloud e utilizados para gerar relatórios de Opt-Out. A cada 15 dias, os nomes e motivos registrados eram compartilhados com o setor responsável, auxiliando na revisão das estratégias de comunicação e no aprimoramento das campanhas.</p>
+     </div>
+ </div> 
+
+    <!-- Rodapé -->
+    <footer style="position: fixed; bottom: 0; left: 0; right: 0">
+      © 2024 • Thomson Reuters™ Todos os direitos reservados.
+    </footer>
+
+    <script>
+      // Adiciona um event listener para o checkbox "Outros"
+      document.addEventListener("DOMContentLoaded", function () {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(function (checkbox) {
+          checkbox.addEventListener("change", function () {
+            if (this.checked) {
+              // Desmarca todos os outros checkboxes
+              checkboxes.forEach(function (otherCheckbox) {
+                if (otherCheckbox !== checkbox) {
+                  otherCheckbox.checked = false;
+                }
+              });
+            }
+          });
+        });
+
+        var checkboxOutros = document.getElementById("outros");
+        var textareaDescricao = document.getElementById("descricao");
+
+        checkboxOutros.addEventListener("change", function () {
+          if (this.checked) {
+            textareaDescricao.style.display = "block";
+          } else {
+            textareaDescricao.style.display = "none";
+          }
+        });
+      });
+
+      // Função para validar o formulário
+      function validarFormulario() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var peloMenosUmSelecionado = false;
+
+        checkboxes.forEach(function (checkbox) {
+          if (checkbox.checked) {
+            peloMenosUmSelecionado = true;
+          }
+        });
+
+        if (!peloMenosUmSelecionado) {
+          alert(
+            "Por favor, selecione pelo menos uma opção antes de enviar o formulário."
+          );
+          return false;
+        }
+
+        var checkboxSelecionados = Array.from(checkboxes).filter(function (
+          checkbox
+        ) {
+          return checkbox.checked;
+        });
+
+        if (checkboxSelecionados.length > 1) {
+          alert("Por favor, selecione apenas uma opção.");
+          return false;
+        }
+
+        var checkboxOutros = document.getElementById("outros");
+        var textareaDescricao = document.getElementById("descricao");
+
+        if (checkboxOutros.checked && textareaDescricao.value.trim() === "") {
+          alert('Por favor, forneça uma descrição nos "Outros Motivos".');
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>

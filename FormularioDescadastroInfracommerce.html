@@ -1,0 +1,239 @@
+<!--%%[
+VAR @sid, @jid, @reason, @lue, @lue_prop, @lue_statusCode, @overallStatus, @requestId, @Response, @Status, @Error
+
+SET @subscriberkey = AttributeValue('_subscriberkey')
+SET @jobid = AttributeValue('jobid')
+SET @listid = AttributeValue('listid')
+SET @batchid = AttributeValue('_jobSubscriberbatchid')
+]%%-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribe Page</title>
+    <link rel="icon" type="image/png" href="https://image.crm.infracommerce.com.br/lib/fe2f117371640478721c70/m/1/4aa680a1-b20e-4e4a-9858-1e672a03b5cb.png"> <!-- Substitua "caminho_para_seu_icone.png" pelo caminho do seu arquivo de ícone -->
+    
+    <style>
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        img {
+            width: 140px;
+            height: auto;
+            margin-right: 600px;
+            margin-left: -750px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 410px;
+            width: 100%;
+            margin-top: 100px;
+        }
+
+        .content0 {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 410px;
+            width: 100%;
+            margin-top: 100px;
+            font-size: 12px;
+            
+        }
+
+        #descricao {
+            display: none;
+        }
+
+        .button {
+            background: linear-gradient(to right, #8861EA, #B247AD, #D93074, #DD2D6D, #E8335F, #F67A50, #FFAB48, #A6BA5E, #3BCA7C, #35C79E, #3CC2C1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #3F3354;
+        }
+
+        footer, header {
+            background-color: #3F3354;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            margin-top: auto;
+            font-size: 10px;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20%;
+        }
+
+        h3, p {
+            margin: 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            img {
+                width: 140px;
+                display: block;
+                margin: 0 auto 20px;
+            }
+
+            h2 {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            header {
+                width: 100%;
+                position: relative;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content {
+                font-size: 12px;
+            }
+
+            .button:hover {
+                background: #3F3354;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://image.crm.infracommerce.com.br/lib/fe2f117371640478721c70/m/1/b0c271ed-0378-464f-9e38-8c20a771751f.png" alt="Logo">
+        <div>
+            <h2>Bem-Vindo!</h2>
+            <p>Por favor, preencha o formulário abaixo:</p>
+        </div>
+    </header>
+
+    <div class="content">
+        
+        <h2>Ajude-nos a Melhorar!</h2>
+
+        <form action="pag de redirect" method="GET" onsubmit="return validarFormulario()">
+            <label for="Cancelar_inscricao">
+                <input type="checkbox" id="Cancelar_inscricao" name="Cancelar_inscricao"> Não quero mais receber estes e-mails
+            </label><br>
+            <label for="Nao_solicitado">
+                <input type="checkbox" id="Nao_solicitado" name="Nao_solicitado"> Eu nunca me inscrevi para esta lista de e-mails
+            </label><br>
+            <label for="Irrelevante">
+                <input type="checkbox" id="Irrelevante" name="Irrelevante"> O assunto não é do meu interesse
+            </label><br>
+            <label for="Excesso">
+                <input type="checkbox" id="Excesso" name="Excesso"> Estou recebendo muitos e-mails desta lista
+            </label><br>
+            <label for="outros">
+                <input type="checkbox" id="outros" name="outros"> Outros Motivos
+            </label><br>
+            <label for="descricao">Descreva o motivo:
+                <textarea id="descricao" name="descricao" cols="40" rows="3"></textarea>
+            </label><br>
+
+            <input type="hidden" id="subscriberKey" name="subscriberKey" value="%%=v(@subscriberkey)=%%">
+            <input type="hidden" id="jobid" name="jobid" value="%%=v(@jobid)=%%">
+            <input type="hidden" id="listid" name="listid" value="%%=v(@listid)=%%">
+            <input type="hidden" id="batchid" name="batchid" value="%%=v(@batchid)=%%">
+
+            <button type="submit" class="button">Enviar Respostas</button>
+        </form>
+    </div>
+
+    <div class="content0">
+        <!-- Descrição explicativa da LP -->
+        <div class="descricao-texto">
+           <p>Essa LP foi desenvolvida para o time de Growth da Infracommerce com o objetivo de permitir que os usuários optassem por não receber mais comunicações via e-mail. A página coleta informações como nome, e-mail, assunto da comunicação que o usuario clicou para se descadastrar, o motivo do descadastro e a data.
+               Esses dados eram armazenados em uma Data Extension no Salesforce Marketing Cloud e utilizados para gerar relatórios de Opt-Out. A cada 15 dias, os nomes e motivos registrados eram compartilhados com o setor responsável, auxiliando na revisão das estratégias de comunicação e no aprimoramento das campanhas.</p>
+       </div>
+   </div>  
+
+    <footer style="position: fixed; bottom: 0; left: 0; right: 0;">
+        © 2024 • Infracommerce Todos os direitos reservados.
+    </footer>
+
+    <script>
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    checkboxes.forEach(function (otherCheckbox) {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var checkboxOutros = document.getElementById('outros');
+            var textareaDescricao = document.getElementById('descricao');
+
+            checkboxOutros.addEventListener('change', function () {
+                if (this.checked) {
+                    textareaDescricao.style.display = 'block';
+                } else {
+                    textareaDescricao.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function validarFormulario() {
+            var checkboxOutros = document.getElementById('outros');
+            var textareaDescricao = document.getElementById('descricao');
+
+            if (checkboxOutros.checked) {
+                if (textareaDescricao.value.trim() === '') {
+                    alert('Por favor, forneça uma descrição nos "Outros Motivos".');
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>

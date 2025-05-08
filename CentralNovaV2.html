@@ -1,0 +1,2170 @@
+<!--%%[
+VAR @email, @jobID, @emailName
+
+    SET @email = RequestParameter('email')
+    SET @jobID = RequestParameter('jobID')
+    SET @emailName = RequestParameter('emailName')
+
+    SET @CursosEJornadas = RowCount(LookupRows("Tb_CP_CursosEJornadas", "Email", @email))
+    SET @Eventos = RowCount(LookupRows("Tb_CP_Eventos", "Email", @email))
+    SET @Parceria = RowCount(LookupRows("Tb_CP_Parceria", "Email", @email))
+    SET @Sms = RowCount(LookupRows("Tb_CP_Exclusao_SMS", "Email", @email))
+    SET @Whatsapp = RowCount(LookupRows("Tb_CP_WhatsApp", "Email", @email))
+    SET @Todas_comunicacoes = RowCount(LookupRows("Tb_CP_TodasComunicacoes", "Email", @email))
+
+]%%-->
+
+<title>Central de Preferências</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style type="text/css">
+    @media screen and (max-width:800px) {
+
+        header h1,
+
+        header form {
+
+            width: 100% !important;
+
+            float: none !important;
+
+        }
+
+        header .logo {
+
+            float: none;
+
+        }
+
+        header h1 {
+
+            text-align: left;
+
+            margin: 0px 0px 10px 0px !important;
+
+        }
+
+        header form {
+
+            margin: 20px 0 !important;
+
+            padding: 0% 5%;
+
+            border: none !important;
+
+            width: 90% !important;
+
+        }
+
+        header {
+
+            padding: 50px 20px !important;
+
+            background-position-x: -175px !important;
+
+            background-color: #000;
+
+            background-position-y: 1px !important;
+
+        }
+
+        header #rangeDatas input[type="date"] {
+
+            width: 41.5% !important;
+
+        }
+
+        .content {
+
+            overflow: scroll !important;
+
+        }
+
+        .m10 {
+
+            width: 70% !important;
+
+        }
+
+        .m2 {
+
+            width: 30% !important;
+
+        }
+
+        .switch {
+
+            margin-top: 51px !important;
+
+        }
+
+    }
+
+    body {
+
+        margin: 0px;
+
+        padding: 0px;
+
+        background-color: #fff;
+
+    }
+
+    header {
+
+        overflow: hidden;
+
+        background-color: #0c0c0c;
+
+    }
+
+    header h1 {
+
+        color: #fff;
+
+        font-family: freight-sans-pro, Arial, sans-serif;
+
+        font-weight: bold;
+
+        font-size: 26px;
+
+        display: inline-block;
+
+        margin: 0px;
+
+        top: 10px;
+
+        position: relative;
+
+    }
+
+    header.content {
+
+        padding: 50px 0;
+
+        /*background-image: url(https://www.xpi.com.br/assets/images/concrete-x.png);
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    background-position-x: -100px;
+
+    background-color: #000;
+
+    background-position-y: -60px;*/
+
+    }
+
+    .lista-categorias {
+
+        background-color: #fff;
+
+    }
+
+    .lista-categorias .container {
+
+        box-shadow: 7px 10px 25px 0px rgba(0, 0, 0, 0.1);
+
+        padding: 40px 24px;
+
+    }
+
+    .lista-categorias h3 {
+
+        color: #333333;
+
+        margin: 0px 0px 15px 0px;
+
+        font-family: freight-sans-pro, sans-serif;
+
+        font-weight: normal;
+
+        font-size: 22px;
+
+        font-weight: 400;
+
+        margin: 0px;
+
+    }
+
+    .lista-categorias .head-categorias h3 {
+
+        font-weight: bold;
+
+    }
+
+    .lista-categorias .row {
+
+        padding: 10px 0;
+
+        margin-bottom: 0px;
+
+    }
+
+    .head-categorias .row {
+
+        padding: 10px 0 30px;
+
+    }
+
+    .lista-categorias .row:nth-child(even) {
+
+        background-color: #ECF0F4;
+
+        border-bottom: 1px solid #eee;
+
+        border-top: 1px solid #eee;
+
+    }
+
+    .lista-categorias p {
+
+        color: #666;
+
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+
+    }
+
+    input[type="checkbox"] {
+
+        opacity: 1 !important;
+
+        pointer-events: inherit !important;
+
+    }
+
+    .container .m2 {
+
+        text-align: center;
+
+    }
+
+    .switch {
+
+        position: relative !important;
+
+        display: inline-block !important;
+
+        width: 60px !important;
+
+        height: 28px !important;
+
+        margin-top: 37px;
+
+    }
+
+    /* Hide default HTML checkbox */
+
+    .switch input {
+
+        opacity: 0 !important;
+
+        width: 0 !important;
+
+        height: 0 !important;
+
+    }
+
+    /* The slider */
+
+    .slider {
+
+        position: absolute !important;
+
+        cursor: pointer !important;
+
+        top: 0 !important;
+
+        left: 0 !important;
+
+        right: 0 !important;
+
+        bottom: 0 !important;
+
+        background-color: #ccc !important;
+
+        -webkit-transition: .4s !important;
+
+        transition: .4s !important;
+
+    }
+
+    .slider:before {
+
+        position: absolute !important;
+
+        content: "" !important;
+
+        height: 20px !important;
+
+        width: 20px !important;
+
+        left: 4px !important;
+
+        bottom: 4px !important;
+
+        background-color: white !important;
+
+        -webkit-transition: .4s !important;
+
+        transition: .4s !important;
+
+    }
+
+    input:checked+.slider {
+
+        background-color: #00ac1a !important;
+
+    }
+
+    input:focus+.slider {
+
+        box-shadow: 0 0 1px #00ac1a !important;
+
+    }
+
+    input:checked+.slider:before {
+
+        -webkit-transform: translateX(32px) !important;
+
+        -ms-transform: translateX(32px) !important;
+
+        transform: translateX(32px) !important;
+
+    }
+
+    /* Rounded sliders */
+
+    .slider.round {
+
+        border-radius: 28px !important;
+
+    }
+
+    .slider.round:before {
+
+        border-radius: 50% !important;
+
+    }
+
+    .col .row {
+
+        margin-left: -0.75rem;
+
+        margin-right: -0.75rem;
+
+    }
+
+    .section {
+
+        padding-top: 1rem;
+
+        padding-bottom: 1rem;
+
+    }
+
+    .section.no-pad {
+
+        padding: 0;
+
+    }
+
+    .section.no-pad-bot {
+
+        padding-bottom: 0;
+
+    }
+
+    .section.no-pad-top {
+
+        padding-top: 0;
+
+    }
+
+    .row {
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+        margin-bottom: 20px;
+
+    }
+
+    .row:after {
+
+        content: "";
+
+        display: table;
+
+        clear: both;
+
+    }
+
+    .row .col {
+
+        float: left;
+
+        -webkit-box-sizing: border-box;
+
+        box-sizing: border-box;
+
+        padding: 0 0.75rem;
+
+        min-height: 1px;
+
+    }
+
+    .row .col[class*="push-"],
+
+    .row .col[class*="pull-"] {
+
+        position: relative;
+
+    }
+
+    .row .col.s1 {
+
+        width: 8.3333333333%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s2 {
+
+        width: 16.6666666667%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s3 {
+
+        width: 25%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s4 {
+
+        width: 33.3333333333%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s5 {
+
+        width: 41.6666666667%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s6 {
+
+        width: 50%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s7 {
+
+        width: 58.3333333333%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s8 {
+
+        width: 66.6666666667%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s9 {
+
+        width: 75%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s10 {
+
+        width: 83.3333333333%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s11 {
+
+        width: 91.6666666667%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.s12 {
+
+        width: 100%;
+
+        margin-left: auto;
+
+        left: auto;
+
+        right: auto;
+
+    }
+
+    .row .col.offset-s1 {
+
+        margin-left: 8.3333333333%;
+
+    }
+
+    .row .col.pull-s1 {
+
+        right: 8.3333333333%;
+
+    }
+
+    .row .col.push-s1 {
+
+        left: 8.3333333333%;
+
+    }
+
+    .row .col.offset-s2 {
+
+        margin-left: 16.6666666667%;
+
+    }
+
+    .row .col.pull-s2 {
+
+        right: 16.6666666667%;
+
+    }
+
+    .row .col.push-s2 {
+
+        left: 16.6666666667%;
+
+    }
+
+    .row .col.offset-s3 {
+
+        margin-left: 25%;
+
+    }
+
+    .row .col.pull-s3 {
+
+        right: 25%;
+
+    }
+
+    .row .col.push-s3 {
+
+        left: 25%;
+
+    }
+
+    .row .col.offset-s4 {
+
+        margin-left: 33.3333333333%;
+
+    }
+
+    .row .col.pull-s4 {
+
+        right: 33.3333333333%;
+
+    }
+
+    .row .col.push-s4 {
+
+        left: 33.3333333333%;
+
+    }
+
+    .row .col.offset-s5 {
+
+        margin-left: 41.6666666667%;
+
+    }
+
+    .row .col.pull-s5 {
+
+        right: 41.6666666667%;
+
+    }
+
+    .row .col.push-s5 {
+
+        left: 41.6666666667%;
+
+    }
+
+    .row .col.offset-s6 {
+
+        margin-left: 50%;
+
+    }
+
+    .row .col.pull-s6 {
+
+        right: 50%;
+
+    }
+
+    .row .col.push-s6 {
+
+        left: 50%;
+
+    }
+
+    .row .col.offset-s7 {
+
+        margin-left: 58.3333333333%;
+
+    }
+
+    .row .col.pull-s7 {
+
+        right: 58.3333333333%;
+
+    }
+
+    .row .col.push-s7 {
+
+        left: 58.3333333333%;
+
+    }
+
+    .row .col.offset-s8 {
+
+        margin-left: 66.6666666667%;
+
+    }
+
+    .row .col.pull-s8 {
+
+        right: 66.6666666667%;
+
+    }
+
+    .row .col.push-s8 {
+
+        left: 66.6666666667%;
+
+    }
+
+    .row .col.offset-s9 {
+
+        margin-left: 75%;
+
+    }
+
+    .row .col.pull-s9 {
+
+        right: 75%;
+
+    }
+
+    .row .col.push-s9 {
+
+        left: 75%;
+
+    }
+
+    .row .col.offset-s10 {
+
+        margin-left: 83.3333333333%;
+
+    }
+
+    .row .col.pull-s10 {
+
+        right: 83.3333333333%;
+
+    }
+
+    .row .col.push-s10 {
+
+        left: 83.3333333333%;
+
+    }
+
+    .row .col.offset-s11 {
+
+        margin-left: 91.6666666667%;
+
+    }
+
+    .row .col.pull-s11 {
+
+        right: 91.6666666667%;
+
+    }
+
+    .row .col.push-s11 {
+
+        left: 91.6666666667%;
+
+    }
+
+    .row .col.offset-s12 {
+
+        margin-left: 100%;
+
+    }
+
+    .row .col.pull-s12 {
+
+        right: 100%;
+
+    }
+
+    .row .col.push-s12 {
+
+        left: 100%;
+
+    }
+
+    @media only screen and (min-width: 601px) {
+
+        .row .col.m1 {
+
+            width: 8.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m2 {
+
+            width: 16.6666666667% !important;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m3 {
+
+            width: 25%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m4 {
+
+            width: 33.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m5 {
+
+            width: 41.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m6 {
+
+            width: 50%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m7 {
+
+            width: 58.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m8 {
+
+            width: 66.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m9 {
+
+            width: 75%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m10 {
+
+            width: 83.3333333333% !important;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m11 {
+
+            width: 91.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.m12 {
+
+            width: 100%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.offset-m1 {
+
+            margin-left: 8.3333333333%;
+
+        }
+
+        .row .col.pull-m1 {
+
+            right: 8.3333333333%;
+
+        }
+
+        .row .col.push-m1 {
+
+            left: 8.3333333333%;
+
+        }
+
+        .row .col.offset-m2 {
+
+            margin-left: 16.6666666667%;
+
+        }
+
+        .row .col.pull-m2 {
+
+            right: 16.6666666667%;
+
+        }
+
+        .row .col.push-m2 {
+
+            left: 16.6666666667%;
+
+        }
+
+        .row .col.offset-m3 {
+
+            margin-left: 25%;
+
+        }
+
+        .row .col.pull-m3 {
+
+            right: 25%;
+
+        }
+
+        .row .col.push-m3 {
+
+            left: 25%;
+
+        }
+
+        .row .col.offset-m4 {
+
+            margin-left: 33.3333333333%;
+
+        }
+
+        .row .col.pull-m4 {
+
+            right: 33.3333333333%;
+
+        }
+
+        .row .col.push-m4 {
+
+            left: 33.3333333333%;
+
+        }
+
+        .row .col.offset-m5 {
+
+            margin-left: 41.6666666667%;
+
+        }
+
+        .row .col.pull-m5 {
+
+            right: 41.6666666667%;
+
+        }
+
+        .row .col.push-m5 {
+
+            left: 41.6666666667%;
+
+        }
+
+        .row .col.offset-m6 {
+
+            margin-left: 50%;
+
+        }
+
+        .row .col.pull-m6 {
+
+            right: 50%;
+
+        }
+
+        .row .col.push-m6 {
+
+            left: 50%;
+
+        }
+
+        .row .col.offset-m7 {
+
+            margin-left: 58.3333333333%;
+
+        }
+
+        .row .col.pull-m7 {
+
+            right: 58.3333333333%;
+
+        }
+
+        .row .col.push-m7 {
+
+            left: 58.3333333333%;
+
+        }
+
+        .row .col.offset-m8 {
+
+            margin-left: 66.6666666667%;
+
+        }
+
+        .row .col.pull-m8 {
+
+            right: 66.6666666667%;
+
+        }
+
+        .row .col.push-m8 {
+
+            left: 66.6666666667%;
+
+        }
+
+        .row .col.offset-m9 {
+
+            margin-left: 75%;
+
+        }
+
+        .row .col.pull-m9 {
+
+            right: 75%;
+
+        }
+
+        .row .col.push-m9 {
+
+            left: 75%;
+
+        }
+
+        .row .col.offset-m10 {
+
+            margin-left: 83.3333333333%;
+
+        }
+
+        .row .col.pull-m10 {
+
+            right: 83.3333333333%;
+
+        }
+
+        .row .col.push-m10 {
+
+            left: 83.3333333333%;
+
+        }
+
+        .row .col.offset-m11 {
+
+            margin-left: 91.6666666667%;
+
+        }
+
+        .row .col.pull-m11 {
+
+            right: 91.6666666667%;
+
+        }
+
+        .row .col.push-m11 {
+
+            left: 91.6666666667%;
+
+        }
+
+        .row .col.offset-m12 {
+
+            margin-left: 100%;
+
+        }
+
+        .row .col.pull-m12 {
+
+            right: 100%;
+
+        }
+
+        .row .col.push-m12 {
+
+            left: 100%;
+
+        }
+
+    }
+
+    @media only screen and (min-width: 993px) {
+
+        .row .col.l1 {
+
+            width: 8.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l2 {
+
+            width: 16.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l3 {
+
+            width: 25%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l4 {
+
+            width: 33.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l5 {
+
+            width: 41.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l6 {
+
+            width: 50%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l7 {
+
+            width: 58.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l8 {
+
+            width: 66.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l9 {
+
+            width: 75%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l10 {
+
+            width: 83.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l11 {
+
+            width: 91.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.l12 {
+
+            width: 100%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.offset-l1 {
+
+            margin-left: 8.3333333333%;
+
+        }
+
+        .row .col.pull-l1 {
+
+            right: 8.3333333333%;
+
+        }
+
+        .row .col.push-l1 {
+
+            left: 8.3333333333%;
+
+        }
+
+        .row .col.offset-l2 {
+
+            margin-left: 16.6666666667%;
+
+        }
+
+        .row .col.pull-l2 {
+
+            right: 16.6666666667%;
+
+        }
+
+        .row .col.push-l2 {
+
+            left: 16.6666666667%;
+
+        }
+
+        .row .col.offset-l3 {
+
+            margin-left: 25%;
+
+        }
+
+        .row .col.pull-l3 {
+
+            right: 25%;
+
+        }
+
+        .row .col.push-l3 {
+
+            left: 25%;
+
+        }
+
+        .row .col.offset-l4 {
+
+            margin-left: 33.3333333333%;
+
+        }
+
+        .row .col.pull-l4 {
+
+            right: 33.3333333333%;
+
+        }
+
+        .row .col.push-l4 {
+
+            left: 33.3333333333%;
+
+        }
+
+        .row .col.offset-l5 {
+
+            margin-left: 41.6666666667%;
+
+        }
+
+        .row .col.pull-l5 {
+
+            right: 41.6666666667%;
+
+        }
+
+        .row .col.push-l5 {
+
+            left: 41.6666666667%;
+
+        }
+
+        .row .col.offset-l6 {
+
+            margin-left: 50%;
+
+        }
+
+        .row .col.pull-l6 {
+
+            right: 50%;
+
+        }
+
+        .row .col.push-l6 {
+
+            left: 50%;
+
+        }
+
+        .row .col.offset-l7 {
+
+            margin-left: 58.3333333333%;
+
+        }
+
+        .row .col.pull-l7 {
+
+            right: 58.3333333333%;
+
+        }
+
+        .row .col.push-l7 {
+
+            left: 58.3333333333%;
+
+        }
+
+        .row .col.offset-l8 {
+
+            margin-left: 66.6666666667%;
+
+        }
+
+        .row .col.pull-l8 {
+
+            right: 66.6666666667%;
+
+        }
+
+        .row .col.push-l8 {
+
+            left: 66.6666666667%;
+
+        }
+
+        .row .col.offset-l9 {
+
+            margin-left: 75%;
+
+        }
+
+        .row .col.pull-l9 {
+
+            right: 75%;
+
+        }
+
+        .row .col.push-l9 {
+
+            left: 75%;
+
+        }
+
+        .row .col.offset-l10 {
+
+            margin-left: 83.3333333333%;
+
+        }
+
+        .row .col.pull-l10 {
+
+            right: 83.3333333333%;
+
+        }
+
+        .row .col.push-l10 {
+
+            left: 83.3333333333%;
+
+        }
+
+        .row .col.offset-l11 {
+
+            margin-left: 91.6666666667%;
+
+        }
+
+        .row .col.pull-l11 {
+
+            right: 91.6666666667%;
+
+        }
+
+        .row .col.push-l11 {
+
+            left: 91.6666666667%;
+
+        }
+
+        .row .col.offset-l12 {
+
+            margin-left: 100%;
+
+        }
+
+        .row .col.pull-l12 {
+
+            right: 100%;
+
+        }
+
+        .row .col.push-l12 {
+
+            left: 100%;
+
+        }
+
+    }
+
+    @media only screen and (min-width: 1201px) {
+
+        .row .col.xl1 {
+
+            width: 8.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl2 {
+
+            width: 16.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl3 {
+
+            width: 25%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl4 {
+
+            width: 33.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl5 {
+
+            width: 41.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl6 {
+
+            width: 50%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl7 {
+
+            width: 58.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl8 {
+
+            width: 66.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl9 {
+
+            width: 75%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl10 {
+
+            width: 83.3333333333%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl11 {
+
+            width: 91.6666666667%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.xl12 {
+
+            width: 100%;
+
+            margin-left: auto;
+
+            left: auto;
+
+            right: auto;
+
+        }
+
+        .row .col.offset-xl1 {
+
+            margin-left: 8.3333333333%;
+
+        }
+
+        .row .col.pull-xl1 {
+
+            right: 8.3333333333%;
+
+        }
+
+        .row .col.push-xl1 {
+
+            left: 8.3333333333%;
+
+        }
+
+        .row .col.offset-xl2 {
+
+            margin-left: 16.6666666667%;
+
+        }
+
+        .row .col.pull-xl2 {
+
+            right: 16.6666666667%;
+
+        }
+
+        .row .col.push-xl2 {
+
+            left: 16.6666666667%;
+
+        }
+
+        .row .col.offset-xl3 {
+
+            margin-left: 25%;
+
+        }
+
+        .row .col.pull-xl3 {
+
+            right: 25%;
+
+        }
+
+        .row .col.push-xl3 {
+
+            left: 25%;
+
+        }
+
+        .row .col.offset-xl4 {
+
+            margin-left: 33.3333333333%;
+
+        }
+
+        .row .col.pull-xl4 {
+
+            right: 33.3333333333%;
+
+        }
+
+        .row .col.push-xl4 {
+
+            left: 33.3333333333%;
+
+        }
+
+        .row .col.offset-xl5 {
+
+            margin-left: 41.6666666667%;
+
+        }
+
+        .row .col.pull-xl5 {
+
+            right: 41.6666666667%;
+
+        }
+
+        .row .col.push-xl5 {
+
+            left: 41.6666666667%;
+
+        }
+
+        .row .col.offset-xl6 {
+
+            margin-left: 50%;
+
+        }
+
+        .row .col.pull-xl6 {
+
+            right: 50%;
+
+        }
+
+        .row .col.push-xl6 {
+
+            left: 50%;
+
+        }
+
+        .row .col.offset-xl7 {
+
+            margin-left: 58.3333333333%;
+
+        }
+
+        .row .col.pull-xl7 {
+
+            right: 58.3333333333%;
+
+        }
+
+        .row .col.push-xl7 {
+
+            left: 58.3333333333%;
+
+        }
+
+        .row .col.offset-xl8 {
+
+            margin-left: 66.6666666667%;
+
+        }
+
+        .row .col.pull-xl8 {
+
+            right: 66.6666666667%;
+
+        }
+
+        .row .col.push-xl8 {
+
+            left: 66.6666666667%;
+
+        }
+
+        .row .col.offset-xl9 {
+
+            margin-left: 75%;
+
+        }
+
+        .row .col.pull-xl9 {
+
+            right: 75%;
+
+        }
+
+        .row .col.push-xl9 {
+
+            left: 75%;
+
+        }
+
+        .row .col.offset-xl10 {
+
+            margin-left: 83.3333333333%;
+
+        }
+
+        .row .col.pull-xl10 {
+
+            right: 83.3333333333%;
+
+        }
+
+        .row .col.push-xl10 {
+
+            left: 83.3333333333%;
+
+        }
+
+        .row .col.offset-xl11 {
+
+            margin-left: 91.6666666667%;
+
+        }
+
+        .row .col.pull-xl11 {
+
+            right: 91.6666666667%;
+
+        }
+
+        .row .col.push-xl11 {
+
+            left: 91.6666666667%;
+
+        }
+
+        .row .col.offset-xl12 {
+
+            margin-left: 100%;
+
+        }
+
+        .row .col.pull-xl12 {
+
+            right: 100%;
+
+        }
+
+        .row .col.push-xl12 {
+
+            left: 100%;
+
+        }
+
+    }
+
+    .container {
+
+        max-width: 1000px;
+
+        margin: 0 auto;
+
+        
+
+    }
+
+    .logo {
+
+        width: 170px;
+
+        float: left;
+
+        border-right: 1px solid #fff;
+
+        padding-right: 0px;
+
+        margin-right: 20px;
+
+        position: relative;
+
+    }
+
+    .botao {
+
+        font-size: 1.125rem;
+
+        display: inline-block;
+
+        min-height: 50px;
+
+        width: 150px;
+
+        max-width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-decoration: none;
+
+        transition: background-color .3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+        text-decoration: none;
+
+        background-color: #00ac1a;
+
+        border-color: #00ac1a;
+
+        color: #ffffff;
+
+        font-family: freight-sans-pro, Arial, sans-serif;
+
+        margin-top: 20px;
+
+        float: right;
+
+        font-weight: bold;
+
+        border-radius: calc(.25rem * 2);
+
+    }
+
+    .botao:hover {
+
+        background-color: #008614;
+
+        border-color: #008614;
+
+    }
+</style>
+
+<script src=https://unpkg.com/jspdf@latest/dist/jspdf.min.js></script>
+
+<script src=https://code.jquery.com/jquery-3.4.1.slim.min.js
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+
+<header class="content">
+
+    <div class="container">
+        <h1>| Central de Preferências</h1>
+</div>
+    <script>
+        function todasComunicaoes() {
+
+            var inputs = document.querySelectorAll('input[type=checkbox]');
+
+            for (var i = 0; i < inputs.length; i++) {
+                if (document.getElementById("Todas_comunicacoes").checked == true) {
+                    document.getElementById(inputs[i].id).checked = true;
+                } else {
+                    document.getElementById(inputs[i].id).checked = false;
+                }
+            }
+
+        }
+    </script>
+</header>
+
+<p style="text-align: center;">Desenvolver essa Landing Page foi um desafio técnico significativo, principalmente pela complexidade de integrar lógica personalizada com o Salesforce Marketing Cloud. Para possibilitar a alteração do status de cada cliente entre Active e Unsubscribed, foi necessário aplicar uma combinação de AMPscript e JavaScript, criando uma lógica robusta que garantisse a atualização precisa do perfil do usuário em tempo real. Após diversas tentativas e testes, consegui implementar uma solução eficaz — o que me trouxe não apenas um aprendizado valioso, mas também uma grande satisfação com o resultado final.</p>
+<p style="text-align: center;">Essa Landing Page (LP) foi desenvolvida com o objetivo de permitir que os usuários se descadastrem de todas as comunicações, caso desejem, ou personalizem os tipos de conteúdos que desejam continuar recebendo. Além disso, se em algum momento o usuário quiser voltar a receber as comunicações, basta acessar novamente a LP, selecionar as opções desejadas e enviar — o que atualiza automaticamente seu status para "Active" dentro do Salesforce Marketing Cloud.
+
+    A página coleta informações como nome, e-mail, tipo de comunicação da qual o usuário optou por se descadastrar, motivo do opt-out e data da solicitação. Esses dados são armazenados em uma Data Extension no Salesforce Marketing Cloud e utilizados para gerar relatórios de descadastro (Opt-Out). Quinzenalmente, os nomes e motivos registrados são compartilhados com o setor responsável, contribuindo para a revisão das estratégias de comunicação e o aprimoramento das campanhas.</p>
+
+<section class="content lista-categorias">
+
+    <form action='https://cloud.mail.vocemaisrico.com/Tks_NovaCentral' method="post">
+        <div class="container">
+            <div class="head-categorias">
+                <div class="row">
+                    <div class="col s12 m10">
+                        <p style="font-size: 140%;">
+                            
+                            Ative as preferências de canal para ser notificado onde você estiver.
+                        </p>
+                        <p>
+                            Seu aprendizado financeiro é a nossa prioridade, por isso, aqui você encontra opções para <b>ativar / desativar notificações que façam mais sentido para a sua rotina de estudos</b>.
+                        </p>
+                        <p>
+                            <b>Ative os canais em que você prefere ser notificado</b> sobre novas aulas, conteúdos e lives extraordinárias <b>(caso surja uma nova oportunidade incrível, iremos te avisar)</b>.
+                        </p>
+                    </div>
+    
+                    <div class="col s12 m2">
+                        <h3 class="canal"></h3>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Cursos e Jornadas -->
+            <div class="row">
+                <div class="col s12 m10">
+                    <h3>Novos cursos e jornadas</h3>
+                    <p>Ao desativar esta chave, você deixa de receber lembretes de novos cursos disponíveis.</p>
+                </div>
+                <div class="col s12 m2">
+                    <label class="switch">
+                        <input type="checkbox" id="CursosEJornadas" name="CursosEJornadas" %%[ IF @CursosEJornadas=="0" THEN ]%%checked%%[ ENDIF ]%%>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- Eventos -->
+            <div class="row">
+                <div class="col s12 m10">
+                    <h3>Eventos</h3>
+                    <p>Ao desativar esta chave, você deixa de receber avisos e lembretes de eventos, desafios online, e encontros organizados pelo Bruno Perini.</p>
+                </div>
+                <div class="col s12 m2">
+                    <label class="switch">
+                        <input type="checkbox" id="Eventos" name="Eventos" %%[ IF @Eventos=="0" THEN ]%%checked%%[ ENDIF ]%%>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- Parcerias -->
+            <div class="row">
+                <div class="col s12 m10">
+                    <h3>Parcerias com outras marcas do grupo</h3>
+                    <p>Ao desativar esta chave, você deixa de receber conteúdos com recomendação de cursos complementares e lançamentos de outras empresas do Grupo Primo e de seus parceiros.</p>
+                </div>
+                <div class="col s12 m2">
+                    <label class="switch">
+                        <input type="checkbox" id="Parceria" name="Parceria" %%[ IF @Parceria=="0" THEN ]%%checked%%[ ENDIF ]%%>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- SMS -->
+            <div class="row">
+                <div class="col s12 m10">
+                    <h3>Sms</h3>
+                    <p>Ao desativar esta chave, você deixa de receber alertas via SMS, mas tem a opção de continuar se atualizando via e-mail e/ou WhatsApp.</p>
+                </div>
+                <div class="col s12 m2">
+                    <label class="switch">
+                        <input type="checkbox" id="Sms" name="Sms" %%[ IF @Sms=="0" THEN ]%%checked%%[ ENDIF ]%%>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- WhatsApp -->
+            <div class="row">
+                <div class="col s12 m10">
+                    <h3>WhatsApp</h3>
+                    <p>Ao desativar esta chave, você deixa de receber alertas via WhatsApp, mas tem a opção de continuar se atualizando via e-mail e/ou SMS.</p>
+                </div>
+                <div class="col s12 m2">
+                    <label class="switch">
+                        <input type="checkbox" id="Whatsapp" name="Whatsapp" %%[ IF @Whatsapp=="0" THEN ]%%checked%%[ ENDIF ]%%>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- Todas Comunicações -->
+            <div class="row">
+                <div class="col s12 m10">
+                    <h3>Todas Comunicações</h3>
+                    <p>Ao desativar esta chave, você deixa de receber todas as nossas comunicações. Opção não recomendada ; )</p>
+                </div>
+                <div class="col s12 m2">
+                    <label class="switch">
+                        <input type="checkbox" id="Todas_comunicacoes" onchange="todasComunicaoes();"
+                            name="Todas_comunicacoes" %%[ IF @Todas_comunicacoes=="0" THEN ]%%checked%%[ ENDIF ]%%>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- Campos Hidden e Botão de Submissão -->
+            <div class="row">
+                <div class="col s12 m9">
+                    &nbsp;
+                </div>
+    
+                <div class="col s12 m3">
+                    <input type="hidden" id="email" name="email" value="%%=v(@email)=%%">
+                    <input type="hidden" id="jobID" name="jobID" value="%%=v(@jobID)=%%">
+                    <input type="hidden" id="emailName" name="emailName" value="%%=v(@emailName)=%%">
+                    <button type="submit" class="botao">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <script>
+        // Função que será chamada ao alterar o checkbox "Todas Comunicações"
+        function todasComunicaoes() {
+            const todasComun = document.getElementById("Todas_comunicacoes").checked;
+            const email = document.getElementById("email").value;
+    
+            // Verifica se o checkbox "Todas as Comunicações" foi desmarcado
+            if (!todasComun) {
+                // Desmarca e desativa os outros checkboxes
+                document.getElementById("CursosEJornadas").disabled = true;
+                document.getElementById("Eventos").disabled = true;
+                document.getElementById("Parceria").disabled = true;
+                document.getElementById("Sms").disabled = true;
+                document.getElementById("Whatsapp").disabled = true;
+    
+                document.getElementById("CursosEJornadas").checked = false;
+                document.getElementById("Eventos").checked = false;
+                document.getElementById("Parceria").checked = false;
+                document.getElementById("Sms").checked = false;
+                document.getElementById("Whatsapp").checked = false;
+            } else {
+                // Caso contrário, ativa os checkboxes novamente
+                document.getElementById("CursosEJornadas").disabled = false;
+                document.getElementById("Eventos").disabled = false;
+                document.getElementById("Parceria").disabled = false;
+                document.getElementById("Sms").disabled = false;
+                document.getElementById("Whatsapp").disabled = false;
+
+                // Ativa os checkboxes se "Todas Comunicações" estiver marcada
+                document.getElementById("CursosEJornadas").checked = true;
+                document.getElementById("Eventos").checked = true;
+                document.getElementById("Parceria").checked = true;
+                document.getElementById("Sms").checked = true;
+                document.getElementById("Whatsapp").checked = true;
+            }
+    
+            // Atualiza o status das preferências no servidor
+            updateStatus(email, todasComun ? "Active" : "Unsubscribed");
+        }
+    
+        // Função para atualizar o status das preferências no servidor
+        function updateStatus(email, status) {
+            const url = status === "Active" ? "https://cloud.mail.vocemaisrico.com/Active" : "https://cloud.mail.vocemaisrico.com/Unsub"; // Crias as LPs, Active e Unsubs nas B.Us e Trocar essas Urls para as LPs criadas.
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `${url}?e=${encodeURIComponent(email)}`, true);
+            xhr.onload = function () {
+                // Se necessário, você pode colocar algum código aqui para confirmar que a atualização foi feita, sem exibir alertas.
+            };
+            xhr.send();
+        }
+    </script>
+</section>
+<footer>
+</footer>
+</body>
+</html>

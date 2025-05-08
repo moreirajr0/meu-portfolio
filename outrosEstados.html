@@ -1,0 +1,192 @@
+<!--%%[
+VAR @subscriberkey, @email
+
+SET @subscriberkey = AttributeValue('_subscriberkey')
+SET @email = AttributeValue('email')
+
+]%%-->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="icon" type="image/png" href="https://image.crm.infracommerce.com.br/lib/fe3611737164047e771478/m/1/23a8e66d-756c-49b2-91c0-e766d7484753.png"> <!-- Substitua "caminho_para_seu_icone.png" pelo caminho do seu arquivo de ícone -->
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header img {
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 20px;
+      font-weight: normal;
+      text-align: center;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+
+    p {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 20px;
+      font-weight: normal;
+      margin-left: 27%;
+      margin-right: 10%;
+    }
+
+    h4 {
+      font-family: Verdana, Geneva, sans-serif;
+      text-align: center;
+
+    }
+
+    /* Estilo adicional para o formulário */
+    form {
+      text-align: center;
+    }
+
+    select {
+      width: 220px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    label{
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 16px;
+    }
+
+    button {
+      background: linear-gradient(to right, #16E3F8, #01E79C, #B5CF42, #FFAF00, #FF9A00, #FF7501, #FE5D00, #FE1300);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: black;
+    }
+
+    /* Estilizando o botão para centralizar */
+    .button-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    fieldset {
+      width: 300px;
+      /* Largura desejada */
+      margin: 0 auto;
+      /* Centraliza na página */
+      text-align: center;
+      /* Alinha o conteúdo do fieldset */
+      padding: 20px;
+      /* Adiciona espaço interno */
+    }
+
+    footer img {
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img
+      src="https://image.crm.infracommerce.com.br/lib/fe3611737164047e771478/m/1/3b2f4d4f-85e8-484b-a945-8f718587c3c2.jpeg"
+      alt="Descrição da Imagem">
+  </header>
+  <h2>Agradecemos pelo interesse em nossos produtos e pedimos desculpas por qualquer inconveniente causado, porém não atendemos fora do estado do Rio de Janeiro.</h2>
+  <p>Caso nossa faixa de CEP seja expandida, te avisaremos!</p> <br>
+  <!-- Formulário para Estado -->
+  <form action="url pag redirect" method="post">
+    <fieldset>
+      <legend>Selecione seu estado:</legend>
+      <select id="estado" name="estado">
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+      </select>
+
+      <br>
+      <br>
+      <label>Como você conheceu a Coca-Cola Andina?</label>
+      <textarea id="comentario" name="comentario" rows="4" cols="50" required></textarea>
+
+      <input type="hidden" id="subscriberKey" name="subscriberKey" value="%%=v(@subscriberkey)=%%">
+      <input type="hidden" id="email" name="email" value="%%=v(@email)=%%">
+
+      <!-- Container para centralizar o botão -->
+      <div class="button-container">
+        <button type="submit">Enviar</button>
+      </div>
+    </fieldset>
+  </form>
+  <footer>
+    <img
+      src="https://image.crm.infracommerce.com.br/lib/fe3611737164047e771478/m/1/4435396c-b040-48f1-a65b-3734f2baa6c8.jpg"
+      alt="Descrição da Imagem">
+  </footer>
+</body>
+
+</html>
