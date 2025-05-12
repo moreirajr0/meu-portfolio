@@ -59,3 +59,21 @@ const landingSwiper = new Swiper('.landing-swiper', {
     }
   }
 });
+
+// Exibir ou ocultar o botão com base no scroll
+window.addEventListener('scroll', () => {
+  const button = document.getElementById('backToTop');
+  if (window.scrollY > 300) {
+    button.style.display = 'block';
+  } else {
+    button.style.display = 'none';
+  }
+});
+
+// Rolagem suave ao topo quando o botão for clicado
+document.getElementById('backToTop').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
