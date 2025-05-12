@@ -60,20 +60,33 @@ const landingSwiper = new Swiper('.landing-swiper', {
   }
 });
 
-// Exibir ou ocultar o botão com base no scroll
-window.addEventListener('scroll', () => {
-  const button = document.getElementById('backToTop');
-  if (window.scrollY > 300) {
-    button.style.display = 'block';
-  } else {
-    button.style.display = 'none';
-  }
-});
 
-// Rolagem suave ao topo quando o botão for clicado
-document.getElementById('backToTop').addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+// Referência para o botão "Voltar ao Topo"
+const backToTopButton = document.getElementById('backToTop');
+
+// Variável para controlar se o botão já apareceu
+let hasScrolled = false;
+
+// Inicialmente, o botão é invisível
+backToTopButton.style.display = 'none';
+
+// Função para mostrar ou esconder o botão
+function toggleBackToTopButton() {
+  if (window.scrollY > 100 && !hasScrolled) {
+    // Quando rolar mais de 100px para baixo, mostra o botão
+    backToTopButton.style.display = 'block';
+    hasScrolled = true; // Marcar que o usuário rolou
+  } else if (window.scrollY <= 100 && hasScrolled) {
+    // Se rolar para cima, esconde o botão
+    backToTopButton.style.display = 'none';
+    hasScrolled = false; // O usuário ainda não rolou
+  }
+}
+
+// Evento de scroll na janela
+window.addEventListener('scroll', toggleBackToTopButton);
+
+// Quando o botão for clicado, volta ao topo
+backToTopButton.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
