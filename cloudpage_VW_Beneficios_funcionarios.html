@@ -1,0 +1,319 @@
+<!--
+%%[
+
+SET @tracking_logo = CONCAT("&utm_content=", "logo")
+SET @logo = Concat("https://wa.me/551140046644/?", @tracking_logo)
+
+SET @tracking_BannerFinanciamento = CONCAT("&utm_content=", "BannerFinanciamento")
+SET @BannerFinanciamento = Concat("https://wa.me/551140046644/?", @tracking_BannerFinanciamento)
+
+SET @tracking_BannerConsorcio = CONCAT("&utm_content=", "BannerConsorcio")
+SET @BannerConsorcio = Concat("https://wa.me/551140046644/?", @tracking_BannerConsorcio)
+
+SET @tracking_BannerSeguros = CONCAT("&utm_content=", "BannerSeguros")
+SET @BannerSeguros = Concat("https://wa.me/551140046644/?", @tracking_BannerSeguros)
+
+SET @tracking_BannerCreditoPessoal = CONCAT("&utm_content=", "BannerCreditoPessoal")
+SET @BannerCreditoPessoal = Concat("https://wa.me/551140046644/?", @tracking_BannerCreditoPessoal)
+
+SET @tracking_SignDrive = CONCAT("&utm_content=", "SignDrive")
+SET @SignDrive = Concat("https://wa.me/558008990001/?", @tracking_SignDrive)
+
+]%%
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Page VW</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #cdecfb;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        padding: 0px 0px;
+        background-color: #cdecfb;
+    }
+
+    .logo img {
+        max-width: 200px;
+        height: auto;
+    }
+
+    main {
+        width: 100%;
+        margin: 0;
+        padding: 0px 0px 0px 0px;
+        align-items: center;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #cdecfb;
+    }
+
+    .carousel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        /* limite máximo opcional */
+        margin: 0 auto;
+        flex: 1 1 100%;
+        /* permite encolher e crescer */
+    }
+
+    .slides {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .slides img {
+        flex: 1 1 auto;
+        /* faz a imagem se ajustar como os blocos */
+        width: 100%;
+        height: auto;
+        /* mantém proporção */
+        max-width: 100%;
+        min-width: 200px;
+        /* evita que fique minúscula demais */
+        display: none;
+    }
+
+    .slides img.active {
+        display: block;
+    }
+
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.7);
+        border: none;
+        cursor: pointer;
+        font-size: 24px;
+        padding: 10px;
+        color: #003e51;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .left {
+        left: 10px;
+    }
+
+    .right {
+        right: 10px;
+    }
+
+    .blocks {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0px;
+        max-width: 100%;
+        gap: 10px;
+        /* espaçamento entre os blocos */
+    }
+
+    .block {
+        flex: 1 1 18%;
+        /* permite encolher e crescer com a tela */
+        max-width: 220px;
+        /* largura máxima opcional */
+        min-width: 150px;
+        /* largura mínima para não quebrar layout */
+        text-align: center;
+        margin: 5px;
+        background-color: #cdecfb;
+    }
+
+    .banner img {
+        width: 100%;
+        height: auto;
+        background-color: #cdecfb;
+    }
+
+    .qr-code {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        /* Espaço entre o banner e o QR Code */
+    }
+
+    .qr-code img {
+        max-width: 100%;
+        /* Ajusta a largura máxima do QR Code */
+        height: auto;
+        /* Mantém a proporção do QR Code */
+    }
+
+    .cta {
+        padding: 10px;
+        border: 2px solid #cdecfb;
+        color: #003e51;
+        background-color: #cdecfb;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 80%;
+        margin: 10px auto;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    @media (max-width: 1024px) {
+        .block {
+            flex: 1 1 22%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .block {
+            flex: 1 1 45%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .block {
+            flex: 1 1 90%;
+        }
+
+        .arrow {
+            top: 22%;
+            /* sobe um pouco no mobile */
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            padding: 8px;
+        }
+
+        .qrcode {
+            display: none;
+        }
+    }
+</style>
+
+<header>
+    <div class="logo">
+        <a href="#"><img src="https://image.mailing.vwfs.com/lib/fe3811717564047d711376/m/1/2f49db27-2a55-4e17-ba05-1f1507646c87.png" alt="Logo Minhas ofertas VW"></a>
+    </div>
+</header>
+
+<main>
+    <section class="carousel">
+        <button class="arrow left" onclick="prevSlide()">&#9664;</button>
+        <div class="slides">
+             <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/a9039200-d587-4c39-81cc-4635e9812a66.jpg" alt="Imagem 1" class="active">
+          
+           <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/09719d40-15f5-4d38-92cc-7a999cb0474a.jpg" alt="Imagem 2">
+          
+          <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/66999c65-bc7d-49c4-99bc-a3b87aaed625.jpg" alt="Imagem 3">
+          
+           <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/8da54316-5b38-4993-9c25-147c68df5898.jpg" alt="Imagem 4">
+          
+           <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/72195479-46a6-4dc7-9e42-aa76d4da8d3b.jpg" alt="Imagem 5">
+          
+        </div>
+        <button class="arrow right" onclick="nextSlide()">&#9654;</button>
+    </section>
+
+    <section class="blocks">
+        <div class="block">
+            <div class="banner">
+                <a href="%%=RedirectTo(@SignDrive)=%%">
+                    <img src="https://image.mailing.vwfs.com/lib/fe3811717564047d711376/m/1/83cb7f68-ccaa-4770-a5ae-5c1a3fce75f5.jpg" alt="Banner S&amp;D">
+                </a>
+            </div>
+            <div class="qr-code">
+                <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/75df0a95-6c12-4655-bcb8-3a039ea43d9b.jpg" alt="QR Code S&amp;D" class="qrcode">
+            </div>
+        </div>
+        <div class="block">
+            <div class="banner">
+                <a href="%%=RedirectTo(@BannerFinanciamento)=%%">
+                    <img src="https://image.mailing.vwfs.com/lib/fe3811717564047d711376/m/1/e075b75d-a824-4f7e-bd4b-dcef79ddcb21.jpg" alt="Banner Financiamento">
+                </a>
+            </div>
+            <div class="qr-code">
+                <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/3d8930a6-bb11-42b9-a0f6-e80d2a32e43f.jpg" alt="QR Code Financiamento" class="qrcode">
+            </div>
+        </div>
+        <div class="block">
+            <div class="banner">
+                <a href="%%=RedirectTo(@BannerConsorcio)=%%">
+                    <img src="https://image.mailing.vwfs.com/lib/fe3811717564047d711376/m/1/b8284058-2240-4b34-ae2f-f65fa3e487fe.jpg" alt="Banner CNVW">
+                </a>
+            </div>
+            <div class="qr-code">
+                <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/04cb3809-a284-4a34-b612-99de880e0836.jpg" alt="QR Code CNVW" class="qrcode">
+            </div>
+        </div>
+        <div class="block">
+            <div class="banner">
+                <a href="%%=RedirectTo(@BannerSeguros)=%%">
+                    <img src="https://image.mailing.vwfs.com/lib/fe3811717564047d711376/m/1/170b3d3e-25a1-4052-9f33-23841f16272f.jpg" alt="Banner Seguros">
+                </a>
+            </div>
+            <div class="qr-code">
+                <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/25f04538-6c13-425b-8b70-8b30c8db8340.jpg" alt="QR Code Seguros" class="qrcode">
+            </div>
+        </div>
+        <div class="block">
+            <div class="banner">
+                <a href="%%=RedirectTo(@BannerCreditoPessoal)=%%">
+                    <img src="https://image.mailing.vwfs.com/lib/fe3811717564047d711376/m/1/f882406f-471b-4a54-bf29-b10dc0efebd8.jpg" alt="Banner Crédito pessoal">
+                </a>
+            </div>
+            <div class="qr-code">
+                <img src="https://image.mail.vwfscomunica.com.br/lib/fe3811717564047d711376/m/1/5e83a80d-b332-49f5-8fec-707bff54cfe4.jpg" alt="QR Code Crédito Pessoal" class="qrcode">
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        const slides = document.querySelectorAll('.slides img');
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        const slides = document.querySelectorAll('.slides img');
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        const slides = document.querySelectorAll('.slides img');
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Inicializa o primeiro slide
+    showSlide(currentSlide);
+</script>
